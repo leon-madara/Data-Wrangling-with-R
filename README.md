@@ -329,31 +329,31 @@ ggplot(diamonds, aes(x = reorder(clarity, -price_per_carat), y = price_per_carat
 ```
 
 ## Findings and Conclusion
-  ### Findings:
-  1.	Price Per Carat by Color and Cut:
-     - The average price per carat varies across color and cut categories.
-     - The price per carat generally decreases from D (colorless) to J (slightly tinted) color categories.
-    	- Interestingly, not all higher quality cuts (like Ideal) command the highest price per carat, indicating that other factors like color and clarity may play a more significant role in pricing        per carat.
-  3.	Carat Size Distribution:
-     - The carat size has a wide distribution, with a median significantly lower than the mean, indicating a right-skewed distribution with outliers on the higher carat size.
-     - Carat size varies by cut, color, and clarity, with some categories like higher clarity (IF, VVS1, VVS2) containing diamonds of larger carat sizes.
-  4.	Price Distribution:
-     - Prices are widely distributed across all clarity grades, with a trend of increasing prices for higher clarity.
-     - The variation in price by cut quality shows that better cuts (Ideal and Premium) do not always correspond to the highest prices, suggesting that buyers also place substantial value on color        and clarity.
-     - The distribution of prices by color shows a general decrease in median price from colorless to more tinted diamonds.
-  5.	Outliers in Price and Carat:
-     - There are notable outliers in both price and carat size, with some diamonds exhibiting exceptionally high values in both, which may represent particularly large or high-quality stones.
-  6.	Relationship Between Carat and Dimensions:
-     - There is a strong positive correlation between carat weight and the dimensions of diamonds (length, width, depth), as expected.
-     - The scatter plots of carat against each dimension exhibit a linear relationship, with the spread increasing for larger diamonds, indicating variability in how carat weight translates to     
-       size.
-  7.	Volume vs. Carat Size:
-     - The relationship between volume and carat is linear and positive, showing that volume is a reliable indicator of carat size. The volume calculation used (x * y * z) is therefore a  
-       reasonable approximation for physical size.
-  8.	Multiple Regression Analysis:
-     - The multiple regression model indicates that carat size has the most substantial effect on price, followed by color and clarity.
-     - The model has a high R-squared value (0.9159), showing that about 91.59% of the variability in price can be explained by the included variables (carat, cut, color, clarity).
- ## Conclusions:
+
+### Findings:
+#### Price Per Carat by Color and Cut:
+- The average price per carat varies across color and cut categories.
+- The price per carat generally decreases from D (colorless) to J (slightly tinted) color categories.
+- Interestingly, not all higher quality cuts (like Ideal) command the highest price per carat, indicating that other factors like color and clarity may play a more significant role in pricing per carat.
+#### Carat Size Distribution
+- The carat size has a wide distribution, with a median significantly lower than the mean, indicating a right-skewed distribution with outliers on the higher carat size.
+- Carat size varies by cut, color, and clarity, with some categories like higher clarity (IF, VVS1, VVS2) containing diamonds of larger carat sizes.
+#### Price Distribution:
+- Prices are widely distributed across all clarity grades, with a trend of increasing prices for higher clarity.
+- The variation in price by cut quality shows that better cuts (Ideal and Premium) do not always correspond to the highest prices, suggesting that buyers also place substantial value on color        and clarity.
+- The distribution of prices by color shows a general decrease in median price from colorless to more tinted diamonds.
+#### Outliers in Price and Carat:
+- There are notable outliers in both price and carat size, with some diamonds exhibiting exceptionally high values in both, which may represent particularly large or high-quality stones.
+#### Relationship Between Carat and Dimensions:
+- There is a strong positive correlation between carat weight and the dimensions of diamonds (length, width, depth), as expected.
+- The scatter plots of carat against each dimension exhibit a linear relationship, with the spread increasing for larger diamonds, indicating variability in how carat weight translates to     
+  size.
+#### Volume vs. Carat Size:
+- The relationship between volume and carat is linear and positive, showing that volume is a reliable indicator of carat size. The volume calculation used (x * y * z) is therefore a reasonable approximation for physical size.
+#### Multiple Regression Analysis:
+- The multiple regression model indicates that carat size has the most substantial effect on price, followed by color and clarity.
+- The model has a high R-squared value (0.9159), showing that about 91.59% of the variability in price can be explained by the included variables (carat, cut, color, clarity).
+## Conclusions:
 The analysis of the **diamonds** dataset provides insightful trends and relationships within the diamond market. Price per carat is not solely determined by cut quality but is influenced more significantly by color and clarity. Carat size shows a skewed distribution with outliers indicating the presence of exceptionally large diamonds. The multiple regression model effectively captures the combined effects of carat, cut, color, and clarity on price, with carat size being the dominant factor. The visualizations and statistical summaries support a robust understanding of the diamond valuation process, with implications for buyers, sellers, and enthusiasts looking to understand what drives diamond prices in the marketplace.
  
 The findings also underscore the complexity of diamond pricing, where multiple factors interact in determining value. The linear relationships between carat and dimensions, as well as carat and volume, confirm the expected patterns that larger diamonds have greater physical dimensions and volume. The presence of outliers suggests that while most diamonds follow a general trend in pricing, there are exceptional cases where unique features may significantly increase a diamond's value.
