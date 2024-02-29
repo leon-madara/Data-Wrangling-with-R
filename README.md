@@ -2,10 +2,21 @@
 I will be performing data wrangling with R using the Diamonds dataset in the ggplot2 package. 
 
 # Data Wrangling with R: Diamonds Dataset Analysis
+
 ## Project Overview
 This project focuses on performing comprehensive data wrangling and analysis on the diamonds dataset, which is included in the ggplot2 package in R. Our objectives are to clean, transform, and analyze the dataset to uncover insights into the factors that influence diamond prices and other characteristics such as carat size, cut quality, color, and clarity.
+
+![Relationship Between Carat and Length](https://github.com/leon-madara/Data-Wrangling-with-R/assets/147078093/c4b36811-cf55-48c4-a74d-4fb8d3bffe9e)
+![Carat Size Distribution by Color](https://github.com/leon-madara/Data-Wrangling-with-R/assets/147078093/2a594547-1701-4a03-b2d3-c7ede71037c8)
+![Average Price Per Carat by Color](https://github.com/leon-madara/Data-Wrangling-with-R/assets/147078093/b99ea77c-8367-4c2e-b61a-1d3583b6ee3a)
+![price by carat across different cuts](https://github.com/leon-madara/Data-Wrangling-with-R/assets/147078093/316cb5e2-48a4-429f-9d5a-34b593ee1fb3)
+
+
+
+
 ## Dataset
 The diamonds dataset contains 10 variables (carat, cut, color, clarity, depth, table, price, x, y, z) for 53,940 diamonds. The dataset is widely used for data analysis and visualization exercises and comes bundled with the ggplot2 package.
+
 ### Key Insights Aimed
  1.	**Price Distribution by Diamond Characteristics**: Analyzing how diamond prices vary with carat, cut, color, and clarity.
  2.	**Impact of Cut, Color, and Clarity on Price**: Determining which of these factors most significantly affects diamond prices.
@@ -14,11 +25,13 @@ The diamonds dataset contains 10 variables (carat, cut, color, clarity, depth, t
  5.	**Trends Over Different Qualities**: Examining how the distribution of prices or carat sizes varies across different qualities.
  6.	**Volume vs. Carat Size**: Calculating the volume of diamonds and analyzing its correlation with carat size.
  7.	**Price Per Carat Analysis**: Investigating the price per carat across different categories of diamonds.
+
 ## Tools and Technologies
   - R Language: For all data wrangling, analysis, and visualization tasks.
   - **ggplot2** Package: For data visualization.
   - **dplyr** Package: For data manipulation.
   - **tidyr** Package: For data tidying.
+
 ### **Installation and Setup**
 Install required packages
 - ```install.packages("ggplot2")```
