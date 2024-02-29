@@ -20,69 +20,46 @@ The diamonds dataset contains 10 variables (carat, cut, color, clarity, depth, t
   - **dplyr** Package: For data manipulation.
   - **tidyr** Package: For data tidying.
 ### **Installation and Setup**
-#### Install required packages
-  ```install.packages("ggplot2")```
-  ```install.packages("dplyr")```
-  ```install.packages("tidyr")```
+Install required packages
+- ```install.packages("ggplot2")```
+- ```install.packages("dplyr")```
+- ```install.packages("tidyr")```
+      
+Load required packages
+- ```library(ggplot2)```
+- ```library(dplyr)```
+- ```library(tidyr)```
+      
+Load the dataset
+```data(diamonds)```
 
-#### Load required packages
-  ```library(ggplot2)```
-  ```library(dplyr)```
-  ```library(tidyr)```
-
-####Load the dataset
-data(diamonds)
-
-####Install required packages
-install.packages("ggplot2")
-install.packages("dplyr")
-install.packages("tidyr") 
-#### Load required packages 
--	library(ggplot2) 
--	library(dplyr) 
--	library(tidyr) 
--Load the dataset data(diamonds) 
-
-###**File Descriptions**
+### **File Descriptions**
 *data_wrangling_script.R*
 -	 Contains all R scripts used for data cleaning, transformation, and analysis.
 -	*visualizations/*: Directory containing all generated plots and visual graphs.
-###**Usage**
+## **Usage**
 To replicate this analysis, run the data_wrangling_script.R script in R or RStudio. Ensure you have the required packages installed and loaded as described in the Installation and Setup section.
 
 ## **Data Analysis**
-###Price Distribution by Diamond Characteristics
-ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_point(aes(color = cut), alpha = 0.5) +
-  geom_smooth() +
-  theme_minimal() +
-  labs(title = "Price Distribution by Carat Size", x = "Carat", y = "Price")
+### Price Distribution by Diamond Characteristics
+- Price Distribution by Carat Size
+```ggplot(diamonds, aes(x = carat, y = price)) + geom_point(aes(color = cut), alpha = 0.5) + geom_smooth() + theme_minimal() + abs(title = "Price Distribution by Carat Size", x = "Carat", y = "Price")```
 
-ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Price Distribution by Cut Quality", x = "Cut", y = "Price")
+### Price Distribution by Cut Quality
+```ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +  geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Cut Quality", x = "Cut", y = "Price")```
 
-ggplot(diamonds, aes(x = color, y = price, fill = color)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Price Distribution by Color", x = "Color", y = "Price")
+### Price Distribution by Color
+```ggplot(diamonds, aes(x = color, y = price, fill = color)) + geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Color", x = "Color", y = "Price")```
 
-ggplot(diamonds, aes(x = clarity, y = price, fill = clarity)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Price Distribution by Clarity", x = "Clarity", y = "Price")
+### Price Distribution by Clarity
+```ggplot(diamonds, aes(x = clarity, y = price, fill = clarity)) + geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Clarity", x = "Clarity", y = "Price")```
 
 #### Fit a multiple regression model
--	model <- lm(price ~ carat + cut + color + clarity, data = diamonds)
--	Summary of the model to check coefficients and significance summary(model)
+-	```model <- lm(price ~ carat + cut + color + clarity, data = diamonds)```
+-	Summary of the model to check coefficients and significance ```summary(model)```
+
 ### ***Visualizing Combined Effects with ggplot2***
-ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_point(aes(color = clarity), alpha = 0.3) +
-  geom_smooth(se = FALSE) +
-  facet_wrap(~cut) +
-  theme_minimal() +
-  labs(title = "Price by Carat across Different Cuts", x = "Carat", y = "Price")
+```ggplot(diamonds, aes(x = carat, y = price)) + geom_point(aes(color = clarity), alpha = 0.3) + geom_smooth(se = FALSE) + facet_wrap(~cut) + theme_minimal() + labs(title = "Price by Carat across Different Cuts", x = "Carat", y = "Price")```
 
 ### ***Relationship Between Carat and Dimensions***
 -	To investigate this relationship, you can use both correlation analysis and visualization techniques
