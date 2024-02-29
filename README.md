@@ -175,141 +175,181 @@ After identifying outliers, the next step is to investigate their characteristic
 Examining Outlier Characteristics
 
 I analyzed the properties of the outliers, such as their cut, color, and clarity grades, to see if they share any common features using a simple code.
--	Summary statistics of outliers
--	summary(price_outliers)
--	
--	Part of the analysis includes checking if high-price outliers tend to have higher carat values, better cut grades, or other distinguishing features.
--	
+-	Summary statistics of outliers using:
+ ```summary(price_outliers)```
+
 ### Visualing the outliers
 Scatter plot of *price vs. carat* with **outliers** highlighted
-ggplot(diamonds, aes(x = carat, y = price)) +
+```
+  ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(aes(color = (price < (price_q1 - 1.5 * price_iqr) | price > (price_q3 + 1.5 * price_iqr))), alpha = 0.5) +
   scale_color_manual(values = c("FALSE" = "grey", "TRUE" = "red")) +
   labs(title = "Diamond Price vs. Carat with Outliers Highlighted", x = "Carat", y = "Price") +
   theme_minimal()
-##**Trends Over Different Qualities**
+```
+
+## **Trends Over Different Qualities**
 Examining how the distribution of prices or carat sizes varies across different qualities.
-####**Price distribution by quality**
-ggplot(diamonds, aes(x = cut, y = price)) +
+
+### **Price distribution by quality**
+```
+  ggplot(diamonds, aes(x = cut, y = price)) +
   geom_boxplot(aes(fill = cut)) +
   labs(title = "Price Distribution by Cut", x = "Cut", y = "Price") +
   theme_minimal()
+```
 
-####**Price distribution by color**
-ggplot(diamonds, aes(x = color, y = price)) +
+### **Price distribution by color**
+```
+  ggplot(diamonds, aes(x = color, y = price)) +
   geom_boxplot(aes(fill = color)) +
   labs(title = "Price Distribution by Color", x = "Color", y = "Price") +
   theme_minimal()
+```
 
-####**Price distribution by clarity**
-ggplot(diamonds, aes(x = clarity, y = price)) +
+### **Price distribution by clarity**
+```
+  ggplot(diamonds, aes(x = clarity, y = price)) +
   geom_boxplot(aes(fill = clarity)) +
   labs(title = "Price Distribution by Clarity", x = "Clarity", y = "Price") +
   theme_minimal()
+```
 
-####*Carat Size Distribution by Quality*
-ggplot(diamonds, aes(x = cut, y = carat)) +
+### *Carat Size Distribution by Quality*
+```
+  ggplot(diamonds, aes(x = cut, y = carat)) +
   geom_boxplot(aes(fill = cut)) +
   labs(title = "Carat Size Distribution by Cut", x = "Cut", y = "Carat") +
   theme_minimal()
-
-####*Carat Size Distribution by Color*
-ggplot(diamonds, aes(x = color, y = carat)) +
+```
+### *Carat Size Distribution by Color*
+```
+  ggplot(diamonds, aes(x = color, y = carat)) +
   geom_boxplot(aes(fill = color)) +
   labs(title = "Carat Size Distribution by Color", x = "Color", y = "Carat") +
   theme_minimal()
+```
 
-####*Carat Size Distribution by Clarity*
-ggplot(diamonds, aes(x = clarity, y = carat)) +
+### *Carat Size Distribution by Clarity*
+```
+  ggplot(diamonds, aes(x = clarity, y = carat)) +
   geom_boxplot(aes(fill = clarity)) +
   labs(title = "Carat Size Distribution by Clarity", x = "Clarity", y = "Carat") +
   theme_minimal()
+```
 
-##**Volume vs. Carat Size**
+## **Volume vs. Carat Size**
 Calculating the volume of diamonds and analyzing its correlation with carat size.
 Analyzing the relationship between the volume of diamonds and their carat size involves calculating the volume based on the dimensions provided in the dataset, and then examining the correlation between the newly calculated volume and carat size. Given that the diamonds dataset contains the dimensions (length x, width y, and depth z) of each diamond, we can use these to calculate the volume.
-###Diamond Volume
-library(dplyr)
 
-diamonds <- diamonds %>%
+### Diamond Volume
+```library(dplyr)```
+
+```
+  diamonds <- diamonds %>%
   mutate(volume = x * y * z)
- Then we examine the summary statistics
-summary(diamonds$volume)
+```
+Then we examine the summary statistics
+```summary(diamonds$volume)```
+
 Then we analyze the correlation
-cor(diamonds$carat, diamonds$volume, use = "complete.obs")
-**0.9763084**
-###Visualize the relationship
-ggplot(diamonds, aes(x = carat, y = volume)) +
+```cor(diamonds$carat, diamonds$volume, use = "complete.obs")```
+
+The result: **0.9763084**
+
+### Visualize the relationship
+```
+  ggplot(diamonds, aes(x = carat, y = volume)) +
   geom_point(alpha = 0.1) +
   geom_smooth(method = "lm", color = "blue") +
   labs(title = "Relationship Between Diamond Volume and Carat Size",
        x = "Carat",
        y = "Volume (mm³)") +
   theme_minimal()
+```
 
 ### **Price Per Carat Analysis**
 Investigating the price per carat across different categories of diamonds.
+
 Calculating the price per carat
+```
 diamonds <- diamonds %>%
   mutate(price_per_carat = price / carat)
+```
+
 The next step is to summarize **Price Per Carat by Category**
+
 #### By cut
 But first we create the column price_per_carat
-library(dplyr)
-- Assuming diamonds is already loaded
+```library(dplyr)```
+Assuming diamonds is already loaded
+```
 diamonds <- diamonds %>%
   mutate(price_per_carat = price / carat)
--Then we check if the column was created
-str(diamonds$price_per_carat)
+```
+
+Then we check if the column was created
+```str(diamonds$price_per_carat)```
 
 After a successful creation, we continue:
+```
 diamonds %>%
   group_by(cut) %>%
   summarise(avg_price_per_carat = mean(price_per_carat)) %>%
   arrange(desc(avg_price_per_carat))
+```
 
 #### By color
+```
 ggplot(diamonds, aes(x = reorder(color, -price_per_carat), y = price_per_carat, fill = color)) +
   geom_bar(stat = "summary", fun = "mean") +
   labs(title = "Average Price Per Carat by Color", x = "Color", y = "Average Price Per Carat") +
   theme_minimal()
+```
 
 #### By clarity
+```
 ggplot(diamonds, aes(x = reorder(clarity, -price_per_carat), y = price_per_carat, fill = clarity)) +
   geom_bar(stat = "summary", fun = "mean") +
   labs(title = "Average Price Per Carat by Clarity", x = "Clarity", y = "Average Price Per Carat") +
   theme_minimal()
+```
 
-##Findings and Conclusion
-Findings:
-1.	Price Per Carat by Color and Cut:
-•	The average price per carat varies across color and cut categories.
-•	The price per carat generally decreases from D (colorless) to J (slightly tinted) color categories.
-•	Interestingly, not all higher quality cuts (like Ideal) command the highest price per carat, indicating that other factors like color and clarity may play a more significant role in pricing per carat.
-2.	Carat Size Distribution:
-•	The carat size has a wide distribution, with a median significantly lower than the mean, indicating a right-skewed distribution with outliers on the higher carat size.
-•	Carat size varies by cut, color, and clarity, with some categories like higher clarity (IF, VVS1, VVS2) containing diamonds of larger carat sizes.
-3.	Price Distribution:
-•	Prices are widely distributed across all clarity grades, with a trend of increasing prices for higher clarity.
-•	The variation in price by cut quality shows that better cuts (Ideal and Premium) do not always correspond to the highest prices, suggesting that buyers also place substantial value on color and clarity.
-•	The distribution of prices by color shows a general decrease in median price from colorless to more tinted diamonds.
-4.	Outliers in Price and Carat:
-•	There are notable outliers in both price and carat size, with some diamonds exhibiting exceptionally high values in both, which may represent particularly large or high-quality stones.
-5.	Relationship Between Carat and Dimensions:
-•	There is a strong positive correlation between carat weight and the dimensions of diamonds (length, width, depth), as expected.
-•	The scatter plots of carat against each dimension exhibit a linear relationship, with the spread increasing for larger diamonds, indicating variability in how carat weight translates to size.
-6.	Volume vs. Carat Size:
-•	The relationship between volume and carat is linear and positive, showing that volume is a reliable indicator of carat size. The volume calculation used (x * y * z) is therefore a reasonable approximation for physical size.
-7.	Multiple Regression Analysis:
-•	The multiple regression model indicates that carat size has the most substantial effect on price, followed by color and clarity.
-•	The model has a high R-squared value (0.9159), showing that about 91.59% of the variability in price can be explained by the included variables (carat, cut, color, clarity).
-Conclusions:
-The analysis of the diamonds dataset provides insightful trends and relationships within the diamond market. Price per carat is not solely determined by cut quality but is influenced more significantly by color and clarity. Carat size shows a skewed distribution with outliers indicating the presence of exceptionally large diamonds. The multiple regression model effectively captures the combined effects of carat, cut, color, and clarity on price, with carat size being the dominant factor. The visualizations and statistical summaries support a robust understanding of the diamond valuation process, with implications for buyers, sellers, and enthusiasts looking to understand what drives diamond prices in the marketplace.
+## Findings and Conclusion
+  ### Findings:
+  1.	Price Per Carat by Color and Cut:
+     - The average price per carat varies across color and cut categories.
+     - The price per carat generally decreases from D (colorless) to J (slightly tinted) color categories.
+    	- Interestingly, not all higher quality cuts (like Ideal) command the highest price per carat, indicating that other factors like color and clarity may play a more significant role in pricing        per carat.
+  3.	Carat Size Distribution:
+     - The carat size has a wide distribution, with a median significantly lower than the mean, indicating a right-skewed distribution with outliers on the higher carat size.
+     - Carat size varies by cut, color, and clarity, with some categories like higher clarity (IF, VVS1, VVS2) containing diamonds of larger carat sizes.
+  4.	Price Distribution:
+     - Prices are widely distributed across all clarity grades, with a trend of increasing prices for higher clarity.
+     - The variation in price by cut quality shows that better cuts (Ideal and Premium) do not always correspond to the highest prices, suggesting that buyers also place substantial value on color        and clarity.
+     - The distribution of prices by color shows a general decrease in median price from colorless to more tinted diamonds.
+  5.	Outliers in Price and Carat:
+     - There are notable outliers in both price and carat size, with some diamonds exhibiting exceptionally high values in both, which may represent particularly large or high-quality stones.
+  6.	Relationship Between Carat and Dimensions:
+     - There is a strong positive correlation between carat weight and the dimensions of diamonds (length, width, depth), as expected.
+     - The scatter plots of carat against each dimension exhibit a linear relationship, with the spread increasing for larger diamonds, indicating variability in how carat weight translates to     
+       size.
+  7.	Volume vs. Carat Size:
+     - The relationship between volume and carat is linear and positive, showing that volume is a reliable indicator of carat size. The volume calculation used (x * y * z) is therefore a  
+       reasonable approximation for physical size.
+  8.	Multiple Regression Analysis:
+     - The multiple regression model indicates that carat size has the most substantial effect on price, followed by color and clarity.
+     - The model has a high R-squared value (0.9159), showing that about 91.59% of the variability in price can be explained by the included variables (carat, cut, color, clarity).
+ ## Conclusions:
+The analysis of the **diamonds** dataset provides insightful trends and relationships within the diamond market. Price per carat is not solely determined by cut quality but is influenced more significantly by color and clarity. Carat size shows a skewed distribution with outliers indicating the presence of exceptionally large diamonds. The multiple regression model effectively captures the combined effects of carat, cut, color, and clarity on price, with carat size being the dominant factor. The visualizations and statistical summaries support a robust understanding of the diamond valuation process, with implications for buyers, sellers, and enthusiasts looking to understand what drives diamond prices in the marketplace.
+ 
 The findings also underscore the complexity of diamond pricing, where multiple factors interact in determining value. The linear relationships between carat and dimensions, as well as carat and volume, confirm the expected patterns that larger diamonds have greater physical dimensions and volume. The presence of outliers suggests that while most diamonds follow a general trend in pricing, there are exceptional cases where unique features may significantly increase a diamond's value.
+
 ##Future Work
 I will use PowerBI, Tableau, or Metabase to create better visualizations and uncover additional key business insights.
+  
 ##Contributors
-•	Your Name
+Leon Madara
 ###License
 This project is open-source and available under the MIT License.
 
