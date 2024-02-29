@@ -42,36 +42,65 @@ To replicate this analysis, run the data_wrangling_script.R script in R or RStud
 
 ## **Data Analysis**
 ### Price Distribution by Diamond Characteristics
-- Price Distribution by Carat Size
-```ggplot(diamonds, aes(x = carat, y = price)) + geom_point(aes(color = cut), alpha = 0.5) + geom_smooth() + theme_minimal() + abs(title = "Price Distribution by Carat Size", x = "Carat", y = "Price")```
+Price Distribution by Carat Size
 
-### Price Distribution by Cut Quality
-```ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +  geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Cut Quality", x = "Cut", y = "Price")```
+```
+ggplot(diamonds, aes(x = carat, y = price)) +
+geom_point(aes(color = cut), alpha = 0.5) +
+geom_smooth() +
+theme_minimal() +
+labs(title = "Price Distribution by Carat Size", x = "Carat", y = "Price")
+```
 
-### Price Distribution by Color
-```ggplot(diamonds, aes(x = color, y = price, fill = color)) + geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Color", x = "Color", y = "Price")```
+Price Distribution by Cut Quality
 
-### Price Distribution by Clarity
-```ggplot(diamonds, aes(x = clarity, y = price, fill = clarity)) + geom_boxplot() + theme_minimal() + labs(title = "Price Distribution by Clarity", x = "Clarity", y = "Price")```
+```
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+geom_boxplot() + theme_minimal() +
+labs(title = "Price Distribution by Cut Quality", x = "Cut", y = "Price")
+```
+
+Price Distribution by Color
+
+```
+ggplot(diamonds, aes(x = color, y = price, fill = color)) +
+geom_boxplot() + theme_minimal() +
+labs(title = "Price Distribution by Color", x = "Color", y = "Price")
+```
+
+Price Distribution by Clarity
+
+```
+ggplot(diamonds, aes(x = clarity, y = price, fill = clarity)) +
+geom_boxplot() + theme_minimal() +
+labs(title = "Price Distribution by Clarity", x = "Clarity", y = "Price")
+```
 
 #### Fit a multiple regression model
 -	```model <- lm(price ~ carat + cut + color + clarity, data = diamonds)```
 -	Summary of the model to check coefficients and significance ```summary(model)```
 
 ### ***Visualizing Combined Effects with ggplot2***
-```ggplot(diamonds, aes(x = carat, y = price)) + geom_point(aes(color = clarity), alpha = 0.3) + geom_smooth(se = FALSE) + facet_wrap(~cut) + theme_minimal() + labs(title = "Price by Carat across Different Cuts", x = "Carat", y = "Price")```
+```
+ggplot(diamonds, aes(x = carat, y = price)) + 
+geom_point(aes(color = clarity), alpha = 0.3) +
+geom_smooth(se = FALSE) +
+facet_wrap(~cut) +
+theme_minimal() +
+labs(title = "Price by Carat across Different Cuts", x = "Carat", y = "Price")
+```
 
 ### ***Relationship Between Carat and Dimensions***
--	To investigate this relationship, you can use both correlation analysis and visualization techniques
-I conducted a **Correlation Analysis**, specifically, the *Pearson correlation coefficients* between carat and each of the dimensions **x, y, z**. This statistical measure is essential in quantifying the strength and direction of the *linear relationship* between carat weight and each dimension.
+- To investigate this relationship, you can use both correlation analysis and visualization techniques.
+- I conducted a **Correlation Analysis**, specifically, the *Pearson correlation coefficients* between carat and each of the dimensions **x, y, z**. This statistical measure is essential in quantifying the strength and direction of the *linear relationship* between carat weight and each dimension.
 
 ### Calculate correlation coefficients
-cor(diamonds$carat, diamonds$x, use = "complete.obs")
-0.9750942
-cor(diamonds$carat, diamonds$y, use = "complete.obs")
-0.9517222
-cor(diamonds$carat, diamonds$z, use = "complete.obs")
-0.9533874
+```cor(diamonds$carat, diamonds$x, use = "complete.obs")```
+The result: 0.9750942
+```cor(diamonds$carat, diamonds$y, use = "complete.obs")```
+The result: 0.9517222
+```cor(diamonds$carat, diamonds$z, use = "complete.obs")```
+The result: 0.9533874
 
 ggplot(diamonds, aes(x = carat, y = x)) +
   geom_point(alpha = 0.5) +
