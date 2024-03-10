@@ -358,12 +358,12 @@ The analysis of the **diamonds** dataset provides insightful trends and relation
  
 The findings also underscore the complexity of diamond pricing, where multiple factors interact in determining value. The linear relationships between carat and dimensions, as well as carat and volume, confirm the expected patterns that larger diamonds have greater physical dimensions and volume. The presence of outliers suggests that while most diamonds follow a general trend in pricing, there are exceptional cases where unique features may significantly increase a diamond's value.
 
-##Future Work
+## Future Work
 I will use PowerBI, Tableau, or Metabase to create better visualizations and uncover additional key business insights.
   
-##Contributors
+## Contributors
 Leon Madara
-###License
+### License
 This project is open-source and available under the MIT License.
 
 
